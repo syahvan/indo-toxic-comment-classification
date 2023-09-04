@@ -46,7 +46,7 @@ banpres,bantuan presiden
 banpur,bantuan tempur
 bansarkas,bantuan sarana kesehatan
 basbang,basi
-bazis,"badan amal, zakat, infak, dan sedekah"
+"bazis,""badan amal, zakat, infak, dan sedekah"""
 bcanda,bercanda
 bcoz,karena
 begajulan,nakal
@@ -268,7 +268,7 @@ lola,lambat berfikir
 louph,cinta
 loupz,cinta
 low,kalau
-luber,"langsung, umum, bebas, dan rahasia"
+"luber,""langsung, umum, bebas, dan rahasia"""
 luchuw,lucu
 luff,cinta
 luph,cinta
@@ -313,8 +313,8 @@ muupz,maaf
 nal,kenal
 nanam,menanam
 napol,narapidana politik
-napza,"narkotika, alkohol, psikotropika, dan zat adiktif "
-narkoba,"narkotika, psikotropika, dan obat terlarang"
+"napza,""narkotika, alkohol, psikotropika, dan zat adiktif """
+"narkoba,""narkotika, psikotropika, dan obat terlarang"""
 narsis,bangga pada diri sendiri
 nekolim,neokolonialisme
 nekolin,neokolonialisme
@@ -7083,7 +7083,7 @@ laa,lah
 hdp,hidup
 kedpan,ke depan
 mndaptkan,mendapatkan
-"nutup""in",menutup nutupi
+"nutup""in,menutup nutupi"
 kakkk,kakak
 za,saja
 mulut2,mulut mulut
@@ -16691,3 +16691,12 @@ mendag,menteri perdagangan
 menaker,menteri tenaga kerja
 memetwit,mentwit
 megangin,memegang
+nwoi,woi
+npropinsi,provinsi
+nbangsat,bangsat
+kroscek,mengecek kembali
+miskiner,miskin
+kriditan,kredit
+pngusiran,pengusiran
+dsamain,disamakan
+tlinga,telinga
