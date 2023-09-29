@@ -1,6 +1,4 @@
 import streamlit as st
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
 import pickle 
 import numpy as np 
 import pandas as pd
