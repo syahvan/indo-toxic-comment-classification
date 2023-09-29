@@ -243,6 +243,7 @@ PyJWT==2.4.0
 pylint==2.16.2
 pylint-venv==2.3.0
 pyls-spyder==0.4.0
+Pympler==1.0.1
 PyNaCl==1.5.0
 pynput==1.7.6
 pyodbc==4.0.34
@@ -263,6 +264,7 @@ python-slugify==5.0.2
 python-snappy==0.6.1
 pytoolconfig==1.2.5
 pytz==2022.7
+pytz-deprecation-shim==0.1.0.post0
 pyviz-comms==2.0.2
 PyWavelets==1.4.1
 pywin32==305.1
@@ -321,7 +323,7 @@ SQLAlchemy==1.4.39
 stack-data==0.2.0
 starlette==0.27.0
 statsmodels==0.13.5
-streamlit==1.27.1
+streamlit==1.26.0
 sympy==1.11.1
 tables==3.7.0
 tabulate==0.8.10
@@ -357,7 +359,7 @@ Twisted==22.2.0
 twisted-iocpsupport==1.0.2
 typing_extensions==4.8.0
 tzdata==2023.3
-tzlocal==5.0.1
+tzlocal==4.3.1
 ujson==5.4.0
 Unidecode==1.2.0
 urllib3==1.26.14
