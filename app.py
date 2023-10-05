@@ -136,7 +136,7 @@ def preprocess_text(text):
 # Main
 def main():
     st.title("Toxicity Classifier Dashboard")
-    menu = st.sidebar.selectbox("Menu", ["Home", "Toxicity Classifier", "Wordcloud"])
+    menu = st.sidebar.selectbox("Menu", ["Home", "Toxicity Classifier", "Toxicity Classifier with CSV", "Wordcloud"])
 
     if menu == "Home":
         st.write("Selamat datang di dashboard Toxicity Classifier.")
@@ -162,7 +162,7 @@ def main():
                 proba_list.append(value)
 
             # Tampilkan label prediksi
-            output_sentence = "Komentar tersebut toxic karena mengandung "
+            output_sentence = "Komentar tersebut <span style='font-weight:bold;color:red'>toxic</span> karena mengandung "
             if predicted_labels:
                 if len(predicted_labels) == 1:
                     output_sentence += f"<span style='font-weight:bold;color:red'>{predicted_labels[0]}</span>"
@@ -172,7 +172,7 @@ def main():
                     output_sentence += f"<span style='font-weight:bold;color:red'>{labels_except_last}</span>"
                     output_sentence += f" dan <span style='font-weight:bold;color:red'>{last_label}</span>"
             else:
-                output_sentence = "Komentar tersebut tidak toxic"
+                output_sentence = "Komentar tersebut <span style='font-weight:bold;color:green'>tidak toxic</span>"
 
             st.markdown(output_sentence + '.', unsafe_allow_html=True)
             
@@ -193,6 +193,49 @@ def main():
         
         # Tampilkan wordcloud
         generate_wordcloud(selected_label)
+
+    elif menu == "Toxicity Classifier with CSV":
+        st.subheader("Prediksi Komentar Toxic Bahasa Indonesia dari File CSV")
+
+        # Upload file CSV
+        uploaded_file = st.file_uploader("Upload file CSV:", type=["csv"])
+
+        if uploaded_file is not None:
+            try:
+                # Membaca data dari file CSV dengan kolom default "Komentar"
+                df = pd.read_csv(uploaded_file, names=["Komentar"])
+                input_texts = df["Komentar"].tolist()
+
+                # Tombol prediksi
+                if st.button("Prediksi"):
+                    # Lakukan prediksi
+                    tfidf = pickle.load(open("tf_idf.pkt", "rb"))
+                    text_tfidf = tfidf.transform([preprocess_text(text) for text in input_texts])
+                    loaded_model = pickle.load(open('model_rf.pkt', "rb"))
+                    predicted_labels = loaded_model.predict(text_tfidf)
+
+                    # Tampilkan hasil prediksi untuk setiap komentar
+                    for i, text in enumerate(input_texts):
+                        output_sentence = f"Komentar <b>'{text}'</b> <span style='font-weight:bold;color:red'>toxic</span> karena mengandung "
+
+                        if 1 in predicted_labels[i]:
+                            toxic_labels = [labels[j] for j in range(len(labels)) if predicted_labels[i][j] == 1]
+                            if len(toxic_labels) == 1:
+                                output_sentence += f"<span style='font-weight:bold;color:red'>{toxic_labels[0]}</span>"
+                            else:
+                                labels_except_last = ", ".join(toxic_labels[:-1])
+                                last_label = toxic_labels[-1]
+                                output_sentence += f"<span style='font-weight:bold;color:red'>{labels_except_last}</span>"
+                                output_sentence += f" dan <span style='font-weight:bold;color:red'>{last_label}</span>"
+                        else:
+                            output_sentence = f"Komentar <b>'{text}'</b> <span style='font-weight:bold;color:green'>tidak toxic</span>"
+
+                        # Tampilkan hasil prediksi tiap baris
+                        st.markdown(output_sentence + '.', unsafe_allow_html=True)
+
+            except Exception as e:
+                st.error(f"Terjadi kesalahan: {str(e)}")
+
 
 if __name__ == "__main__":
     main()
