@@ -135,13 +135,23 @@ def preprocess_text(text):
 
 # Main
 def main():
-    st.title("Toxicity Classifier Dashboard")
-    menu = st.sidebar.selectbox("Menu", ["Home", "Toxicity Classifier", "Toxicity Classifier with CSV", "Wordcloud"])
+    menu = st.sidebar.selectbox("Menu", ["Home", "Toxic Comment Detector", "Toxic Comment Detector dengan CSV", "Wordcloud", "About"])
 
     if menu == "Home":
-        st.write("Selamat datang di dashboard Toxicity Classifier.")
+        st.title("Toxic Comment Detector Dashboard")
+        st.image("https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/cyberbullying.jpg", use_column_width=True)
+        st.subheader("Selamat datang di Toxic Comment Detector Dashboard!")
+        st.write("Dashboard ini hadir untuk membantu Anda mengenali komentar toxic dalam bahasa Indonesia. Dengan menggunakan model machine learning, dashboard ini dapat menentukan apakah suatu komentar mengandung unsur toxic seperti pornografi, sara, radikalisme, atau pencemaran nama baik.")
+        st.write("Anda dapat menggunakan menu di sebelah kiri untuk:")
+        st.write("""
+                    - Memasukkan komentar dalam bahasa Indonesia dan mendapatkan prediksi apakah komentar tersebut toxic atau tidak.
+                    - Mengunggah file CSV berisi komentar untuk prediksi banyak komentar sekaligus.
+                    - Melihat visualisasi wordcloud dari dataset yang digunakan untuk melatih model.
+                """)
+        st.write('Selamat mencoba!')
     
-    elif menu == "Toxicity Classifier":
+    elif menu == "Toxic Comment Detector":
+        st.title("Toxic Comment Detector Dashboard")
         st.subheader("Prediksi Komentar Toxic Bahasa Indonesia")
         
         # Input Komentar
@@ -186,6 +196,7 @@ def main():
             st.plotly_chart(fig)
     
     elif menu == "Wordcloud":
+        st.title("Toxic Comment Detector Dashboard")
         st.subheader("Wordcloud dari Dataset")
 
         # Pilihan label
@@ -194,7 +205,8 @@ def main():
         # Tampilkan wordcloud
         generate_wordcloud(selected_label)
 
-    elif menu == "Toxicity Classifier with CSV":
+    elif menu == "Toxic Comment Detector dengan CSV":
+        st.title("Toxic Comment Detector Dashboard")
         st.subheader("Prediksi Komentar Toxic Bahasa Indonesia dari File CSV")
 
         # Upload file CSV
@@ -236,6 +248,41 @@ def main():
             except Exception as e:
                 st.error(f"Terjadi kesalahan: {str(e)}")
 
+    elif menu == "About":
+        st.title("About")
+        st.write("")
+
+        # Membuat kolom dengan layout 1:2
+        col1, col2 = st.columns([1, 2])
+
+        # Menampilkan foto di kolom 1
+        col1.image("https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/profile.png", use_column_width=True, output_format="JPEG")
+
+        # Menampilkan deskripsi tentang diri di kolom 2
+        col2.markdown('''<div style="text-align: justify;">I'm Syahvan Alviansyah Diva Ritonga, a final-year electrical engineering student at Diponegoro University. I'm passionate about technology, especially artificial intelligence, robotics, and data science. I have a strong grasp of machine learning and deep learning tools, including Python, TensorFlow, Pytorch, and R. I genuinely enjoy sharing my experience and knowledge, as much as I enjoy hearing yours! So if you're interested please feel free to contact me by clicking on the logo below.</div>''', unsafe_allow_html=True)
+        col2.write("")
+        col2.markdown('''
+            <style>
+                .icon {
+                    margin-right: 30px; /* Atur jarak kanan antara gambar */
+                }
+            </style>
+
+            <a href="https://www.linkedin.com/in/syahvanalviansyah/" class="icon">
+                <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/linkedin.png" width="20" height="20" />
+            </a>
+
+            <a href="https://github.com/syahvan" class="icon">
+                <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/github.png" width="20" height="20" />
+            </a>
+            
+            <a href="mailto:syahvanalviansyah91@gmail.com?" class="icon">
+                <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/gmail.png" width="20" height="20" />
+            </a>
+            ''',
+            unsafe_allow_html=True
+        )
+        
 
 if __name__ == "__main__":
     main()
