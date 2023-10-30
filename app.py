@@ -208,7 +208,10 @@ def main():
     elif menu == "Toxic Comment Detector dengan CSV":
         st.title("Toxic Comment Detector Dashboard")
         st.subheader("Prediksi Komentar Toxic Bahasa Indonesia dari File CSV")
-        st.info('Notes: Buat setiap komentar dalam 1 kolom')
+        st.markdown('''
+                <strong>Panduan Penggunaan:</strong>
+                Silahkan masukkan komentar dalam satu kolom saja. Setiap baris akan merepresentasikan satu komentar.
+        ''', unsafe_allow_html=True)
 
         # Upload file CSV
         uploaded_file = st.file_uploader("Upload file CSV:", type=["csv"])
