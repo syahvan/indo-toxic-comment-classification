@@ -135,7 +135,7 @@ def preprocess_text(text):
 
 # Main
 def main():
-    menu = st.sidebar.selectbox("Menu", ["Home", "Toxic Comment Detector", "Toxic Comment Detector dengan CSV", "Wordcloud", "About"])
+    menu = st.sidebar.selectbox("Menu", ["Home", "Wordcloud", "Toxic Comment Detector", "Toxic Comment Detector dengan CSV", "About"])
 
     if menu == "Home":
         st.title("Toxic Comment Detector Dashboard")
