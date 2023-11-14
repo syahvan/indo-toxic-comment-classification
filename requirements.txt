@@ -8,5 +8,6 @@ Sastrawi==1.0.1
 scikit-learn==1.2.2
 seaborn==0.12.2
 streamlit==1.26.0
+streamlit-option-menu==0.3.6
 wordcloud==1.9.2
 xgboost==2.0.0
