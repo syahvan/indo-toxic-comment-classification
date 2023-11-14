@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_option_menu import option_menu
 import pickle 
 import numpy as np 
 import pandas as pd
@@ -16,7 +17,7 @@ import itertools
 import warnings
 warnings.filterwarnings("ignore")
 
-labels = ["pornografi", "sara", "radikalisme", "pencemaran nama baik"]
+labels = ["sara", "radikalisme", "pencemaran nama baik", "pornografi"]
 
 # Data training
 data_train = pd.read_csv('https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/data/train_processed.csv')
@@ -135,9 +136,23 @@ def preprocess_text(text):
 
 # Main
 def main():
-    menu = st.sidebar.selectbox("Menu", ["Home", "Wordcloud", "Toxic Comment Detector", "Toxic Comment Detector dengan CSV", "About"])
+    with st.sidebar:
+        st.markdown("<h2 style='text-align: center;'>Dashboard Menu</h2>", unsafe_allow_html=True)
+        selected = option_menu(
+            menu_title=None,  # required
+            options=["Home", "Wordcloud", "Toxic Comment Detector", "About"],  # required
+            icons=["house", "blockquote-left", "chat-left-text", "info-circle"],  # optional
+            menu_icon="cast",  # optional
+            default_index=0,  # optional
+            styles={
+                "nav-link": {
+                    "font-family": "calibri",
+                    "font-size": "18px" 
+                },
+            },
+        )
 
-    if menu == "Home":
+    if selected == "Home":
         st.title("Toxic Comment Detector Dashboard")
         st.image("https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/cyberbullying.jpg", use_column_width=True)
         st.subheader("Selamat datang di Toxic Comment Detector Dashboard!")
@@ -150,52 +165,102 @@ def main():
                 """)
         st.write('Selamat mencoba!')
     
-    elif menu == "Toxic Comment Detector":
+    elif selected == "Toxic Comment Detector":
         st.title("Toxic Comment Detector Dashboard")
-        st.subheader("Prediksi Komentar Toxic Bahasa Indonesia")
-        
-        # Input Komentar
-        input_text = st.text_area("Masukkan Komentar:")
-        
-        # Tombol prediksi
-        if st.button("Prediksi"):
-            # Lakukan prediksi
-            tfidf = pickle.load(open("tf_idf.pkt", "rb"))
-            text_tfidf = tfidf.transform([preprocess_text(input_text)])
-            loaded_model = pickle.load(open('model_rf.pkt', "rb"))
-            predicted_labels = loaded_model.predict(text_tfidf)
-            probabilities = loaded_model.predict_proba(text_tfidf)
-            predicted_labels = [labels[i] for i in range(len(labels)) if predicted_labels[0][i] == 1]
-            proba_list = []
-            for proba in probabilities:
-                value = round(proba[0][1]*100, 2)
-                proba_list.append(value)
 
-            # Tampilkan label prediksi
-            output_sentence = "Komentar tersebut <span style='font-weight:bold;color:red'>toxic</span> karena mengandung "
-            if predicted_labels:
-                if len(predicted_labels) == 1:
-                    output_sentence += f"<span style='font-weight:bold;color:red'>{predicted_labels[0]}</span>"
-                else:
-                    labels_except_last = ", ".join(predicted_labels[:-1])
-                    last_label = predicted_labels[-1]
-                    output_sentence += f"<span style='font-weight:bold;color:red'>{labels_except_last}</span>"
-                    output_sentence += f" dan <span style='font-weight:bold;color:red'>{last_label}</span>"
-            else:
-                output_sentence = "Komentar tersebut <span style='font-weight:bold;color:green'>tidak toxic</span>"
+        tab1, tab2 = st.tabs(["With Comment", "With CSV File"])
 
-            st.markdown(output_sentence + '.', unsafe_allow_html=True)
+        with tab1:
+            st.subheader("Prediksi Komentar Toxic Bahasa Indonesia")
+        
+            # Input Komentar
+            input_text = st.text_area("Masukkan Komentar:")
             
-            # Tampilkan grafik probabilitas
-            prob_df = pd.DataFrame({'Label': labels, 'Probabilitas': proba_list})
-            fig = px.bar(prob_df, x='Label', y='Probabilitas', color='Label', title='Grafik Probabilitas Komentar')
-            fig.update_yaxes(range=[0, 100])
-            hovertemp = "<b>Label: </b> %{x} <br>"
-            hovertemp += "<b>Probabilitas: </b> %{y}<extra></extra>%"
-            fig.update_traces(hovertemplate=hovertemp)
-            st.plotly_chart(fig)
+            # Tombol prediksi
+            if st.button("Prediksi Komentar"):
+                # Lakukan prediksi
+                tfidf = pickle.load(open("tf_idf.pkt", "rb"))
+                text_tfidf = tfidf.transform([preprocess_text(input_text)])
+                loaded_model = pickle.load(open('model_rf.pkt', "rb"))
+                predicted_labels = loaded_model.predict(text_tfidf)
+                probabilities = loaded_model.predict_proba(text_tfidf)
+                predicted_labels = [labels[i] for i in range(len(labels)) if predicted_labels[0][i] == 1]
+                proba_list = []
+                for proba in probabilities:
+                    value = round(proba[0][1]*100, 2)
+                    proba_list.append(value)
+
+                # Tampilkan label prediksi
+                output_sentence = "Komentar tersebut <span style='font-weight:bold;color:red'>toxic</span> karena mengandung "
+                if predicted_labels:
+                    if len(predicted_labels) == 1:
+                        output_sentence += f"<span style='font-weight:bold;color:red'>{predicted_labels[0]}</span>"
+                    else:
+                        labels_except_last = ", ".join(predicted_labels[:-1])
+                        last_label = predicted_labels[-1]
+                        output_sentence += f"<span style='font-weight:bold;color:red'>{labels_except_last}</span>"
+                        output_sentence += f" dan <span style='font-weight:bold;color:red'>{last_label}</span>"
+                else:
+                    output_sentence = "Komentar tersebut <span style='font-weight:bold;color:green'>tidak toxic</span>"
+
+                st.markdown(output_sentence + '.', unsafe_allow_html=True)
+                
+                # Tampilkan grafik probabilitas
+                prob_df = pd.DataFrame({'Label': labels, 'Probabilitas': proba_list})
+                fig = px.bar(prob_df, x='Label', y='Probabilitas', color='Label', title='Grafik Probabilitas Komentar')
+                fig.update_yaxes(range=[0, 100])
+                hovertemp = "<b>Label: </b> %{x} <br>"
+                hovertemp += "<b>Probabilitas: </b> %{y}<extra></extra>%"
+                fig.update_traces(hovertemplate=hovertemp)
+                st.plotly_chart(fig)
+
+        with tab2:
+            st.subheader("Prediksi Komentar Toxic Bahasa Indonesia dari File CSV")
+            st.markdown('''
+                    <strong>Panduan Penggunaan:</strong>
+                    Silahkan masukkan komentar dalam satu kolom saja. Setiap baris akan merepresentasikan satu komentar.
+            ''', unsafe_allow_html=True)
+
+            # Upload file CSV
+            uploaded_file = st.file_uploader("Upload file CSV:", type=["csv"])
+
+            if uploaded_file is not None:
+                try:
+                    # Membaca data dari file CSV dengan kolom default "Komentar"
+                    df = pd.read_csv(uploaded_file, names=["Komentar"])
+                    input_texts = df["Komentar"].tolist()
+
+                    # Tombol prediksi
+                    if st.button("Prediksi File CSV"):
+                        # Lakukan prediksi
+                        tfidf = pickle.load(open("tf_idf.pkt", "rb"))
+                        text_tfidf = tfidf.transform([preprocess_text(text) for text in input_texts])
+                        loaded_model = pickle.load(open('model_rf.pkt', "rb"))
+                        predicted_labels = loaded_model.predict(text_tfidf)
+
+                        # Tampilkan hasil prediksi untuk setiap komentar
+                        for i, text in enumerate(input_texts):
+                            output_sentence = f"Komentar <b>'{text}'</b> <span style='font-weight:bold;color:red'>toxic</span> karena mengandung "
+
+                            if 1 in predicted_labels[i]:
+                                toxic_labels = [labels[j] for j in range(len(labels)) if predicted_labels[i][j] == 1]
+                                if len(toxic_labels) == 1:
+                                    output_sentence += f"<span style='font-weight:bold;color:red'>{toxic_labels[0]}</span>"
+                                else:
+                                    labels_except_last = ", ".join(toxic_labels[:-1])
+                                    last_label = toxic_labels[-1]
+                                    output_sentence += f"<span style='font-weight:bold;color:red'>{labels_except_last}</span>"
+                                    output_sentence += f" dan <span style='font-weight:bold;color:red'>{last_label}</span>"
+                            else:
+                                output_sentence = f"Komentar <b>'{text}'</b> <span style='font-weight:bold;color:green'>tidak toxic</span>"
+
+                            # Tampilkan hasil prediksi tiap baris
+                            st.markdown(output_sentence + '.', unsafe_allow_html=True)
+
+                except Exception as e:
+                    st.error(f"Terjadi kesalahan: {str(e)}")
     
-    elif menu == "Wordcloud":
+    elif selected == "Wordcloud":
         st.title("Toxic Comment Detector Dashboard")
         st.subheader("Wordcloud dari Dataset")
 
@@ -203,56 +268,9 @@ def main():
         selected_label = st.selectbox("Pilih Label:", labels)
         
         # Tampilkan wordcloud
-        generate_wordcloud(selected_label)
+        generate_wordcloud(selected_label) 
 
-    elif menu == "Toxic Comment Detector dengan CSV":
-        st.title("Toxic Comment Detector Dashboard")
-        st.subheader("Prediksi Komentar Toxic Bahasa Indonesia dari File CSV")
-        st.markdown('''
-                <strong>Panduan Penggunaan:</strong>
-                Silahkan masukkan komentar dalam satu kolom saja. Setiap baris akan merepresentasikan satu komentar.
-        ''', unsafe_allow_html=True)
-
-        # Upload file CSV
-        uploaded_file = st.file_uploader("Upload file CSV:", type=["csv"])
-
-        if uploaded_file is not None:
-            try:
-                # Membaca data dari file CSV dengan kolom default "Komentar"
-                df = pd.read_csv(uploaded_file, names=["Komentar"])
-                input_texts = df["Komentar"].tolist()
-
-                # Tombol prediksi
-                if st.button("Prediksi"):
-                    # Lakukan prediksi
-                    tfidf = pickle.load(open("tf_idf.pkt", "rb"))
-                    text_tfidf = tfidf.transform([preprocess_text(text) for text in input_texts])
-                    loaded_model = pickle.load(open('model_rf.pkt', "rb"))
-                    predicted_labels = loaded_model.predict(text_tfidf)
-
-                    # Tampilkan hasil prediksi untuk setiap komentar
-                    for i, text in enumerate(input_texts):
-                        output_sentence = f"Komentar <b>'{text}'</b> <span style='font-weight:bold;color:red'>toxic</span> karena mengandung "
-
-                        if 1 in predicted_labels[i]:
-                            toxic_labels = [labels[j] for j in range(len(labels)) if predicted_labels[i][j] == 1]
-                            if len(toxic_labels) == 1:
-                                output_sentence += f"<span style='font-weight:bold;color:red'>{toxic_labels[0]}</span>"
-                            else:
-                                labels_except_last = ", ".join(toxic_labels[:-1])
-                                last_label = toxic_labels[-1]
-                                output_sentence += f"<span style='font-weight:bold;color:red'>{labels_except_last}</span>"
-                                output_sentence += f" dan <span style='font-weight:bold;color:red'>{last_label}</span>"
-                        else:
-                            output_sentence = f"Komentar <b>'{text}'</b> <span style='font-weight:bold;color:green'>tidak toxic</span>"
-
-                        # Tampilkan hasil prediksi tiap baris
-                        st.markdown(output_sentence + '.', unsafe_allow_html=True)
-
-            except Exception as e:
-                st.error(f"Terjadi kesalahan: {str(e)}")
-
-    elif menu == "About":
+    elif selected == "About":
         st.title("About")
         st.write("")
 
