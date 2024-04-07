@@ -1,11 +1,13 @@
 # Indonesian Toxic Comment Classification
 
+[![Aplikasi Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://indo-toxic-comment-detector.streamlit.app/)
+
 ## Background
 
 Penggunaan internet dan media sosial di Indonesia telah mengalami pertumbuhan pesat dalam beberapa tahun terakhir. Seiring dengan perkembangan teknologi dan ketersediaan akses internet yang semakin mudah, banyak orang di Indonesia telah bergabung dengan berbagai platform media sosial seperti Facebook, Twitter, Instagram, YouTube, bahkan media sosial lokal seperti Kaskus. Berdasarkan data yang diterbitkan oleh datareportal.com pada Januari 2023, jumlah pengguna internet di Indonesia mencapai angka yang sangat signifikan, yaitu sekitar 212,9 juta orang atau 77% dari total populasi. Selain itu, tercatat sekitar 167 juta orang atau 60,4% dari total populasi merupakan pengguna media sosial aktif. Jumlah ini menandakan bahwa lebih dari setengah populasi Indonesia memiliki akses ke internet dan berpotensi menggunakan platform media sosial.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/Data-Tren-Pengguna-Internet-dan-Media-sosial-di-Indonesia-Tahun-2023.png" width="50%" height="50%">
+  <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/Data-Tren-Pengguna-Internet-dan-Media-sosial-di-Indonesia-Tahun-2023.png" width="80%" height="80%">
   <br>
   Gambar 1. Data Jumlah Pengguna internet di Indonesia
 </p>
@@ -13,7 +15,7 @@ Penggunaan internet dan media sosial di Indonesia telah mengalami pertumbuhan pe
 Tingginya penetrasi internet dan media sosial di Indonesia juga menyebabkan banyak orang menghabiskan waktu harian mereka untuk berinteraksi di platform tersebut. Menurut data dari sumber yang sama, pada Januari 2023, rata-rata pengguna internet di Indonesia menghabiskan waktu lebih dari 3 jam per hari untuk beraktivitas di media sosial. Fenomena ini menunjukkan betapa signifikannya peran media sosial dalam kehidupan sehari-hari masyarakat Indonesia.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/Waktu-Orang-Indonesia-Mengakses-Media-Digital-Tahun-2023.png" width="50%" height="50%">
+  <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/Waktu-Orang-Indonesia-Mengakses-Media-Digital-Tahun-2023.png" width="80%" height="80%">
   <br>
   Gambar 1. Data Jumlah Waktu Orang Indonesia Mengakses Media Digital
 </p>
@@ -21,7 +23,7 @@ Tingginya penetrasi internet dan media sosial di Indonesia juga menyebabkan bany
 Sayangnya, pertumbuhan penggunaan media sosial juga membawa dampak negatif. Salah satunya adalah adanya komentar-komentar toxic di berbagai platform media sosial. Komentar-komentar ini bisa berupa ujaran kebencian, pornografi, radikalisme, pelecehan, intimidasi, atau ancaman yang ditujukan kepada individu atau kelompok tertentu. Komentar toxic seperti ini dapat mengakibatkan perpecahan masyarakat, kerusuhan antar individu dan kelompok, gangguan emosional, dan bahkan berpotensi membahayakan kesejahteraan mental para korbannya. Pada tahun 2020, Microsoft merilis “Indeks Keberadaban Digital” atau “Digital Civility Index” yang menunjukkan tingkat keberadaban pengguna internet atau netizen sepanjang tahun 2020. Hasilnya memprihatinkan karena menunjukkan bahwa tingkat keberadaban (civility) netizen Indonesia sangat rendah. Laporan yang didasarkan atas survei pada 16.000 responden di 32 negara itu menunjukkan Indonesia ada di peringkat 29 dan menjadi negara dengan warga netizen paling tidak beradab di Asia Tenggara. Oleh karenanya, pendeteksian komentar-komentar yang mengandung unsur toxic menjadi sesuatu yang harus dikritisi.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/DCI 2020.jpg" width="50%" height="50%">
+  <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/DCI 2020.jpg" width="80%" height="80%">
   <br>
   Gambar 1. Digital Civility Index 2020
 </p>
@@ -67,8 +69,6 @@ Untuk menjalankan proyek ini secara lokal, Anda perlu mengikuti langkah-langkah 
    ```
 
 ## Usage
-
-[![Aplikasi Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://indo-toxic-comment-detector.streamlit.app/)
 
 Anda dapat mengakses aplikasi Streamlit yang telah di-deploy [di sini](https://indo-toxic-comment-detector.streamlit.app/).
 
