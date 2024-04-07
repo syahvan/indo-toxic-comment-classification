@@ -17,7 +17,7 @@ Tingginya penetrasi internet dan media sosial di Indonesia juga menyebabkan bany
 <p align="center">
   <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/Waktu-Orang-Indonesia-Mengakses-Media-Digital-Tahun-2023.png" width="80%" height="80%">
   <br>
-  Gambar 1. Data Jumlah Waktu Orang Indonesia Mengakses Media Digital
+  Gambar 2. Data Jumlah Waktu Orang Indonesia Mengakses Media Digital
 </p>
 
 Sayangnya, pertumbuhan penggunaan media sosial juga membawa dampak negatif. Salah satunya adalah adanya komentar-komentar toxic di berbagai platform media sosial. Komentar-komentar ini bisa berupa ujaran kebencian, pornografi, radikalisme, pelecehan, intimidasi, atau ancaman yang ditujukan kepada individu atau kelompok tertentu. Komentar toxic seperti ini dapat mengakibatkan perpecahan masyarakat, kerusuhan antar individu dan kelompok, gangguan emosional, dan bahkan berpotensi membahayakan kesejahteraan mental para korbannya. Pada tahun 2020, Microsoft merilis “Indeks Keberadaban Digital” atau “Digital Civility Index” yang menunjukkan tingkat keberadaban pengguna internet atau netizen sepanjang tahun 2020. Hasilnya memprihatinkan karena menunjukkan bahwa tingkat keberadaban (civility) netizen Indonesia sangat rendah. Laporan yang didasarkan atas survei pada 16.000 responden di 32 negara itu menunjukkan Indonesia ada di peringkat 29 dan menjadi negara dengan warga netizen paling tidak beradab di Asia Tenggara. Oleh karenanya, pendeteksian komentar-komentar yang mengandung unsur toxic menjadi sesuatu yang harus dikritisi.
@@ -25,7 +25,7 @@ Sayangnya, pertumbuhan penggunaan media sosial juga membawa dampak negatif. Sala
 <p align="center">
   <img src="https://raw.githubusercontent.com/syahvan/indo-toxic-comment-classification/main/image/DCI 2020.jpg" width="80%" height="80%">
   <br>
-  Gambar 1. Digital Civility Index 2020
+  Gambar 3. Digital Civility Index 2020
 </p>
 
 Dalam menghadapi dan menangani masalah komentar toxic di media sosial, diperlukan suatu pendekatan yang efektif dan proaktif. Salah satu solusi yang dapat diadopsi adalah dengan membangun sebuah sistem klasifikasi komentar toxic berbahasa indonesia menggunakan model machine learning. Sistem ini bertujuan untuk secara otomatis mengidentifikasi komentar-komentar dalam bahasa indonesia yang mengandung unsur toxic sehingga dapat segera ditindaklanjuti oleh pihak platform media sosial. Dengan demikian, diharapkan akan tercipta lingkungan media sosial yang lebih aman, positif, dan harmonis bagi seluruh penggunanya.
